@@ -4,7 +4,7 @@
   "description": "Basic endpoints to get around CORs",
   "main": "functions/server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "netlify dev",
     "dev": "nodemon server-local.js"
   },
   "repository": {
@@ -19,13 +19,13 @@
   "homepage": "https://github.com/chasesaddy/ats-express-crank",
   "dependencies": {
     "axios": "1.6.7",
-    "body-parser": "^1.20.2",
     "cors": "^2.8.5",
+    "nodemon": "^3.1.0"
+  },
+  "devDependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.18.3",
     "nodemon": "^3.1.0",
     "serverless-http": "^3.2.0"
-  },
-  "devDependencies": {
-    "nodemon": "^3.1.0"
   }
 }
