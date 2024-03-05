@@ -64,203 +64,21 @@ const assembleUrl = ( baseUrl, wildcardPath, queries ) => {
   return `${ baseUrl }${ wildcardPath }${ fullQuery }`;
 }
 
-// Status Hero helper
-const statusheroInitial = ( req ) => {
-  const baseApiUrl = 'https://service.statushero.com/api/v1/';
-  const fullUrl = assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
+// Status Hero Helper Example
+// const statusheroInitial = ( req ) => {
+//   const baseApiUrl = 'https://service.statushero.com/api/v1/';
+//   const fullUrl = assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
 
-  const headers = {};
-  headers[ 'X-TEAM-ID' ] = req.headers[ 'x-team-id' ];
-  headers[ 'X-API-KEY' ] = req.headers[ 'x-api-key' ];
-  if ( req.headers.hasOwnProperty( 'content-type' ) ) {
-    headers[ 'CONTENT-TYPE' ] = req.headers[ 'content-type' ];
-  }
-  console.log( 'headers', headers );
+//   const headers = {};
+//   headers[ 'X-TEAM-ID' ] = req.headers[ 'x-team-id' ];
+//   headers[ 'X-API-KEY' ] = req.headers[ 'x-api-key' ];
+//   if ( req.headers.hasOwnProperty( 'content-type' ) ) {
+//     headers[ 'CONTENT-TYPE' ] = req.headers[ 'content-type' ];
+//   }
+//   console.log( 'headers', headers );
 
-  return { fullUrl, headers };
-}
-
-// Pass through for Status Hero API GET requests
-router.get( '/statushero/v1/*', ( req, res ) => {
-  const { fullUrl, headers } = statusheroInitial( req );
-
-  Axios.get(
-    fullUrl, 
-    { headers }, 
-  ).then( response => {
-      // res.headers( { ...response.headers } );
-      res.json( { status: response.status, ...response.data } ) 
-    } )
-    .catch( ( error ) => {
-      if ( error.response ) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          res.sendStatus( error.response.status );
-          res.headers( { ...error.response.headers } );
-          res.json( { 
-            if: 'response', 
-            msg: error.message, 
-            ...error.response.data
-          } );
-      } else if ( error.request ) {
-          // The request was made but no response was received
-          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-          res.json( { if: 'request', req: error.request } );
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          res.json( { if: 'else', msg: error.message, message: error.message } );
-      }
-      console.log( error.config );
-    } );
-} );
-
-// Pass through for Status Hero API POST requests
-router.post( '/statushero/v1/*', ( req, res ) => {
-  const { fullUrl, headers } = statusheroInitial( req );
-  
-  Axios.post( 
-    fullUrl, 
-    req.body, 
-    { headers }, 
-    ).then( response => {
-      // res.headers( { ...response.headers } );
-      res.json( { status: response.status, ...response.data } ) 
-    } )
-    .catch( ( error ) => {
-      if ( error.response ) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          res.sendStatus( error.response.status );
-          res.headers( { ...error.response.headers } );
-          res.json( { 
-            if: 'response', 
-            msg: error.message, 
-            ...error.response.data
-          } );
-      } else if (error.request) {
-          // The request was made but no slresponse was received
-          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-          res.json( { if: 'request', req: error.request } );
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          res.json( { if: 'else', msg: error.message, message: error.message } );
-      }
-      console.log( error.config );
-    } );
-} );
-
-// Complice helper
-const compliceInitial = ( req ) => {
-  const baseApiUrl = 'https://complice.co/api/v0/u/me/';
-  const fullUrl = assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
-
-  const headers = { 'Authorization': req.headers[ 'authorization' ] };
-
-  return { fullUrl, headers };
-}
-
-// Pass through for Complice API GET requests
-router.get( '/complice/v0/*', ( req, res ) => {
-  const { fullUrl, headers } = compliceInitial( req );
-
-  Axios.get(
-    fullUrl, 
-    { headers }, 
-  ).then( response => {
-      // res.headers( { ...response.headers } );
-      res.json( { status: response.status, ...response.data } ) 
-    } )
-    .catch( ( error ) => {
-      if ( error.response ) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          res.sendStatus( error.response.status );
-          res.headers( { ...error.response.headers } );
-          res.json( { 
-            if: 'response', 
-            msg: error.message, 
-            ...error.response.data
-          } );
-      } else if ( error.request ) {
-          // The request was made but no response was received
-          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-          res.json( { if: 'request', req: error.request } );
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          res.json( { if: 'else', msg: error.message, message: error.message } );
-      }
-      console.log( error.config );
-    } );
-} );
-
-// Pass through for Complice API POST requests
-router.post( '/complice/v0/*', ( req, res ) => {
-  const { fullUrl, headers } = compliceInitial( req );
-  
-  Axios.post( 
-    fullUrl, 
-    req.body, 
-    { headers }, 
-    ).then( response => {
-      // res.headers( { ...response.headers } );
-      res.json( { status: response.status, ...response.data } ) 
-    } )
-    .catch( ( error ) => {
-      if ( error.response ) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          res.sendStatus( error.response.status );
-          res.headers( { ...error.response.headers } );
-          res.json( { 
-            if: 'response', 
-            msg: error.message, 
-            ...error.response.data
-          } );
-      } else if ( error.request ) {
-          // The request was made but no slresponse was received
-          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-          res.json( { if: 'request', req: error.request } );
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          res.json( { if: 'else', msg: error.message, message: error.message } );
-      }
-      console.log( error.config );
-    } );
-} );
-
-// RescueTime helper
-const rescuetimeInitial = ( req ) => {
-  const baseApiUrl = 'https://www.rescuetime.com/anapi/';
-  return assembleUrl( baseApiUrl, req.params[ 0 ], req.query );
-}
-
-// Pass through for ResuceTime API GET requests
-router.get( '/rescuetime/*', ( req, res ) => {
-  const fullUrl = rescuetimeInitial( req );
-
-  Axios.get(
-    fullUrl 
-  ).then( response => {
-      // res.headers( { ...response.headers } );
-      res.json( { status: response.status, ...response.data } ) 
-    } )
-    .catch( ( error ) => {
-      if ( error.response ) {
-          // The request was made and the server responded with a status code that falls out of the range of 2xx
-          res.sendStatus( error.response.status );
-          res.headers( { ...error.response.headers } );
-          res.json( { 
-            if: 'response', 
-            msg: error.message, 
-            ...error.response.data 
-          } );
-      } else if ( error.request ) {
-          // The request was made but no response was received
-          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
-          res.json( { if: 'request', req: error.request } );
-      } else {
-          // Something happened in setting up the request that triggered an Error
-          res.json( { if: 'else', msg: error.message, message: error.message } );
-      }
-      console.log( error.config );
-    } );
-} );
+//   return { fullUrl, headers };
+// }
 
 // Pass through any url to get around CORS
 router.get( '/c/*', ( req, res ) => {
@@ -297,6 +115,47 @@ router.get( '/c/*', ( req, res ) => {
     } );
   }
 } );
+
+
+// My Own
+
+router.get( '/patreon/crank', ( req, res ) => {
+  const accessToken = "9iou4_M2_FhYbAji7AiYQbG8vQhbdIMBICMEe_z5ZRs"; // Replace 'access_token_variable' with your actual access token
+  const campaignId = "10130297"; // Example campaign ID
+  const url = `https://www.patreon.com/api/oauth2/v2/campaigns/${campaignId}/posts?fields[post]=title,content,is_paid,is_public,published_at,url,embed_data,embed_url,app_id,app_status`;
+
+  Axios
+    .get(url, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    })
+    .then((response) => {
+      // console.log(response.data);
+      res.json( { status: response.status, ...response.data } ) 
+    })
+    .catch((error) => {
+      if ( error.response ) {
+          // The request was made and the server responded with a status code that falls out of the range of 2xx
+          res.sendStatus( error.response.status );
+          res.headers( { ...error.response.headers } );
+          res.json( { 
+            if: 'response', 
+            msg: error.message, 
+            ...error.response.data
+          } );
+      } else if ( error.request ) {
+          // The request was made but no response was received
+          // error.request is instance of XMLHttpRequest in browser, instance of http.ClientRequest in node.js
+          res.json( { if: 'request', req: error.request } );
+      } else {
+          // Something happened in setting up the request that triggered an Error
+          res.json( { if: 'else', msg: error.message, message: error.message } );
+      }
+      console.error( error.config );
+    });
+});
+
 
 app.use( Cors() );
 app.use( bodyParser.json() );
