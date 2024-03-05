@@ -1,7 +1,7 @@
 ## ReadMe
 
 [![Deploy to
-Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/noicouldalwaysturn2u/netlify-express)
+Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chasesaddy/ats-express-crank)
 
 This fork from https://github.com/neverendingqs/netlify-express includes a few additional endpoints.
 
@@ -10,7 +10,7 @@ One is for working with an OAuth 2 Redux auth implementation focused for the fro
 @TODO
 Example url:
 ```sh
-POST https://atsexpress.atextbooksituation.com/.netlify/functions/server/auth-code
+POST https://atsexpresscrank.atextbooksituation.com/.netlify/functions/server/auth-code
 ```
 
 Two other endpoints are for working with Status Hero's API. The endpoints are GET and POST to `/statushero/v1`.
@@ -19,20 +19,20 @@ Two other endpoints are for working with Status Hero's API. The endpoints are GE
 Example urls:
 
 ```sh
-GET https://atsexpress.atextbooksituation.com/.netlify/functions/server/statushero/v1/
-POST https://atsexpress.atextbooksituation.com/.netlify/functions/server/statushero/v1/
+GET https://atsexpresscrank.atextbooksituation.com/.netlify/functions/server/statushero/v1/
+POST https://atsexpresscrank.atextbooksituation.com/.netlify/functions/server/statushero/v1/
 ```
 
 The default url examples:
 
 ```sh
-curl https://atsexpress.atextbooksituation.com/.netlify/functions/server
-curl https://atsexpress.atextbooksituation.com/.netlify/functions/server/another
-curl --header "Content-Type: application/json" --request POST --data '{"json":"POST"}' https://atsexpress.atextbooksituation.com/.netlify/functions/server
+curl https://atsexpresscrank.atextbooksituation.com/.netlify/functions/server
+curl https://atsexpresscrank.atextbooksituation.com/.netlify/functions/server/another
+curl --header "Content-Type: application/json" --request POST --data '{"json":"POST"}' https://atsexpresscrank.atextbooksituation.com/.netlify/functions/server
 ```
 
 The library/npm package this was made for is:
-https://github.com/noicouldalwaysturn2u/oauth2-redux-implicit-authcode
+https://github.com/chasesaddy/oauth2-redux-implicit-authcode
 
 
 ## Previous ReadMe:
