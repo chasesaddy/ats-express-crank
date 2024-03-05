@@ -3,8 +3,6 @@
 [![Deploy to
 Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/chasesaddy/ats-express-crank)
 
-This fork from https://github.com/neverendingqs/netlify-express includes a few additional endpoints.
-
 One is for working with an OAuth 2 Redux auth implementation focused for the front-end with implicit granting. It also allows for authorization code granting which means a backend endpoint is needed for POSTING with the temporary code recieved to get the access token. That endpoint is: `/auth-code`.
 
 @TODO
