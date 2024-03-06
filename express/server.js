@@ -9,10 +9,11 @@ const Cors = require( 'cors' );
 const Axios = require( 'axios' );
 
 console.log('env', process.env.NODE_ENV);
-if (process.env.NODE_ENV === 'development') {
-  require( 'dotenv' ).config(); //( { path: './.env.dev' } )
+require( 'dotenv' ).config();
+// if (process.env.NODE_ENV === 'development') {
+  // require( 'dotenv' ).config(); //( { path: './.env.dev' } )
   // console.log(process.env);
-};
+// };
 
 const router = express.Router();
 
