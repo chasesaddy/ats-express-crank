@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+  ],
+  "settings": {
+    "files.exclude": {
+      ".history": true,
+      "build": true,
+      "logs": true
+    }
+  }
+}

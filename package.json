@@ -5,7 +5,7 @@
   "main": "functions/server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server-local.js"
+    "dev": "NODE_ENV=development nodemon server-local.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "serverless-http": "^3.2.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "nodemon": "^3.1.0",
+    "dotenv": "^16.0.0"    
   }
 }

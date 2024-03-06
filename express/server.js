@@ -8,6 +8,12 @@ const bodyParser = require( 'body-parser' );
 const Cors = require( 'cors' );
 const Axios = require( 'axios' );
 
+console.log('env', process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  require( 'dotenv' ).config(); //( { path: './.env.dev' } )
+  // console.log(process.env);
+};
+
 const router = express.Router();
 
 router.get( '/', ( req, res ) => { 
@@ -44,7 +50,7 @@ router.post( '/auth-code', ( req, res ) => {
           // Something happened in setting up the request that triggered an Error
           res.json( { if: 'else', msg: error.message, message: error.message } );
       }
-      console.log( error.config );
+      // console.log( error.config );
     } );
 } );
 
@@ -120,9 +126,9 @@ router.get( '/c/*', ( req, res ) => {
 // My Own
 
 router.get( '/patreon/crank', ( req, res ) => {
-  const accessToken = "9iou4_M2_FhYbAji7AiYQbG8vQhbdIMBICMEe_z5ZRs"; // Replace 'access_token_variable' with your actual access token
-  const campaignId = "10130297"; // Example campaign ID
-  const url = `https://www.patreon.com/api/oauth2/v2/campaigns/${campaignId}/posts?fields[post]=title,content,is_paid,is_public,published_at,url,embed_data,embed_url,app_id,app_status`;
+  const accessToken = process.env.accessToken;
+  const campaignId = process.env.campaignId;
+  const url = `https://www.patreon.com/api/oauth2/v2/campaigns/${campaignId}/posts?fields${encodeURIComponent("[")}post${encodeURIComponent("]")}=title,content,is_paid,is_public,published_at,url,embed_data,embed_url,app_id,app_status`;
 
   Axios
     .get(url, {
@@ -137,8 +143,8 @@ router.get( '/patreon/crank', ( req, res ) => {
     .catch((error) => {
       if ( error.response ) {
           // The request was made and the server responded with a status code that falls out of the range of 2xx
-          res.sendStatus( error.response.status );
-          res.headers( { ...error.response.headers } );
+          // res.headers( { ...error.response.headers } );
+          // res.sendStatus( error.response.status );
           res.json( { 
             if: 'response', 
             msg: error.message, 
@@ -159,7 +165,7 @@ router.get( '/patreon/crank', ( req, res ) => {
 
 app.use( Cors() );
 app.use( bodyParser.json() );
-app.use( '/.netlify/functions/server', router );  // path must route to lambda
+app.use( '/functions', router );  // path must route to lambda
 app.use( '/', ( req, res ) => res.sendFile( path.join( __dirname, '../index.html' ) ) );
 
 module.exports = app;
